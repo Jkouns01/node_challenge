@@ -17,11 +17,11 @@ const questions=  [
      {
          type:'checkbox',
          message:'Pick a license',
-         choices:['Apache license 2.0','BoostSoftware 1.0','Creative commons', 'MIT'],
-         name:'license'
+         choices:['Apache 2.0','BoostSoftware 1.0','Creative commons', 'MIT'],
+         name:'licensing'
      },
      { 
-     type:'input',
+        type:'input',
          message:'What is your GitHub UserName?',
          name:'whyQuestion'
      },
@@ -33,7 +33,7 @@ const questions=  [
      {
         type:'input',
          message:'What could you improve on?', 
-            name:'sprinklesQuestion'
+        name:'sprinklesQuestion'
      },
      {
         type:'input',
@@ -50,21 +50,20 @@ const questions=  [
 // TODO: Create a function to write README file
 // function writeFile(fileName, data) {}
 const writeToFile = (data)  => {
-    return new Promise((resolve, reject) => {
-        fs.writeFile("README.md", data, err => {
-            if (err) {
-                reject(err);
-                return;
-            } resolve(); //else
-        })
-    })    
+    fs.writeFile("README.md", JSON.stringify(data) , err => {
+        if (err) {
+            console.log("wrong");
+            return;
+        }
+    })   
+
 }
 // TODO: Create a function to initialize app
 function initialize() {
     inquirer.prompt(questions).then(function(data)
     {
         console.log(data)
-        writeToFile(data.namemessage);
+        writeToFile(data);
     })
 
 }
